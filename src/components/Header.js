@@ -54,7 +54,13 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
         <div className="container-fluid justify-content-start">
           {/* <input type="text" id="type" /> */}
           <Link to="/" className="btn btn-outline-light me-2 wow fadeInUp">
-            HOME
+            Search Movie
+          </Link>
+          <Link
+            to="/FavoritePage"
+            className="btn btn-outline-light me-2 wow fadeInUp"
+          >
+            Favorite
           </Link>
           <button
             data-wow-duration="2s"
@@ -85,16 +91,6 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
             onClick={() => filterType(document.getElementById("episode").value)}
           >
             Episode
-          </button>
-          <button
-            data-wow-duration="2s"
-            className="btn btn-sm btn-outline-secondary wow fadeInUp me-2"
-            type="button"
-            id="episode"
-            value={"episode"}
-            onClick={() => filterType(document.getElementById("episode").value)}
-          >
-            Favorite
           </button>
         </div>
       </nav>

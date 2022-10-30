@@ -13,6 +13,7 @@ import { Routes, Route } from "react-router-dom";
 import { Alert } from "antd";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 import SearchPage from "./pages/SearchPage";
+import FavoritePage from "./pages/FavoritePage";
 
 // Global Key
 const APIKEY = "9aae4b93";
@@ -64,6 +65,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<SearchPage />}></Route>
+        <Route path="/FavoritePage" element={<FavoritePage />}></Route>
       </Routes>
     </div>
   );

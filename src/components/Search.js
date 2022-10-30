@@ -8,7 +8,9 @@ const Search = ({ search }) => {
           placeholder="Search Movie Title"
           aria-label="Search"
           id="cari"
+          value={search.value}
           autoComplete="off"
+          // onChange={(event) => search(event.target.value)}
           // onSearch={(value) => searchHandler(value)}
         />
         <button

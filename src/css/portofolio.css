@@ -5,6 +5,13 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+.modal-content {
+  background-image: url("../Fade-In-Background.svg");
+
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .portofolio .img-thumbnail {
   opacity: 0;
   transform: translate(0, -40px);
@@ -53,7 +60,7 @@ footer p {
 .pagination > .active > a {
   background-color: #fff;
   border-color: black;
-  color: black;
+  color: #aaa;
 }
 .pagination > li > a {
   border: 1px solid #fff;
@@ -73,7 +80,7 @@ footer p {
 }
 .pagination > li > a,
 .pagination > li > span {
-  color: #fff;
+  color: black;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,
