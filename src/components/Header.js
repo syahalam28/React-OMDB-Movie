@@ -1,4 +1,6 @@
-import Search from "antd/lib/input/Search";
+// import Search from "antd/lib/input/Search";
+import Search from "./Search";
+import { NavLink, Link } from "react-router-dom";
 
 const Navigation = ({ searchHandler, filterType, pageType }) => {
   return (
@@ -21,7 +23,7 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
             size="large"
             onSearch={(value) => searchHandler(value)}
           /> */}
-          <div className="d-flex" role="search">
+          {/* <div className="d-flex" role="search">
             <input
               className="form-control me-2"
               type="search"
@@ -43,19 +45,23 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
             >
               Search
             </button>
-          </div>
+          </div> */}
+          <Search search={searchHandler} />
         </div>
       </nav>
 
       <nav className="navbar ">
         <div className="container-fluid justify-content-start">
           {/* <input type="text" id="type" /> */}
+          <Link to="/" className="btn btn-outline-light me-2 wow fadeInUp">
+            HOME
+          </Link>
           <button
             data-wow-duration="2s"
             id="movie"
             value={"movie"}
             onClick={() => filterType(document.getElementById("movie").value)}
-            className="btn btn-outline-light me-2 wow fadeInUp"
+            className="btn btn-sm btn-outline-secondary me-2 wow fadeInUp"
             type="submit"
           >
             Movie
@@ -72,7 +78,7 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
           </button>
           <button
             data-wow-duration="2s"
-            className="btn btn-sm btn-outline-secondary wow fadeInUp"
+            className="btn btn-sm btn-outline-secondary wow fadeInUp me-2"
             type="button"
             id="episode"
             value={"episode"}
@@ -82,7 +88,7 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
           </button>
           <button
             data-wow-duration="2s"
-            className="btn btn-sm btn-outline-secondary wow fadeInUp"
+            className="btn btn-sm btn-outline-secondary wow fadeInUp me-2"
             type="button"
             id="episode"
             value={"episode"}
