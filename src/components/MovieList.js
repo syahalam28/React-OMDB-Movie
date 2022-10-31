@@ -1,35 +1,71 @@
 import React from "react";
 
-const MovieList = (props) => {
-  const FavouriteComponent = props.favouriteComponent;
+const MovieList = ({
+  imdbID,
+  ShowDetail,
+  DetailRequest,
+  Poster,
+  Title,
+  favouriteComponent,
+  handleFavouritesClick,
+}) => {
+  const APIKEY = "9aae4b93";
+  const FavouriteComponent = favouriteComponent;
+  // Function Click
+  const clickHandler = () => {
+    // Display Modal
+    DetailRequest(true);
+
+    fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${APIKEY}`)
+      .then((resp) => resp)
+      .then((resp) => resp.json())
+      .then((response) => {
+        DetailRequest(false);
+        ShowDetail(response);
+        console.log(ShowDetail);
+      })
+      .catch(({ message }) => {
+        DetailRequest(false);
+      });
+  };
 
   return (
     <>
-      {props.movies.map((movie, index) => (
-        <div
-          class="image-container d-flex justify-content-start m-3"
-          style={{ width: "20rem" }}
-        >
-          <img
-            className="wow fadeInUp"
-            src={
-              movie.Poster === "N/A"
-                ? "https://img.freepik.com/free-vector/404-error-with-person-looking-concept-illustration_114360-7912.jpg?size=626&ext=jpg&ga=GA1.2.1833429700.1666169274&semt=sph"
-                : movie.Poster
+      <div
+        class="image-container d-flex justify-content-start m-3"
+        onClick={() => clickHandler()}
+        style={{ width: "20rem" }}
+      >
+        <img
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal1"
+          className="wow fadeInUp"
+          src={
+            Poster === "N/A"
+              ? "https://img.freepik.com/free-vector/404-error-with-person-looking-concept-illustration_114360-7912.jpg?size=626&ext=jpg&ga=GA1.2.1833429700.1666169274&semt=sph"
+              : Poster
+          }
+          alt={Title}
+        ></img>
+
+        <div class="card-body">
+          <div
+            href="#"
+            class="overlay"
+            onClick={() =>
+              handleFavouritesClick({
+                imdbID,
+                Poster,
+                Title,
+                ShowDetail,
+                DetailRequest,
+              })
             }
-            alt={movie.Tile}
-          ></img>
-          <div class="card-body">
-            <div
-              href="#"
-              class="overlay"
-              onClick={() => props.handleFavouritesClick(movie)}
-            >
-              <FavouriteComponent />
-            </div>
+          >
+            <FavouriteComponent />
           </div>
         </div>
-      ))}
+      </div>
     </>
   );
 };

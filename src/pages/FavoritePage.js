@@ -9,13 +9,19 @@ import AddFavourites from "../components/AddFavourites";
 import RemoveFavourites from "../components/RemoveFavourites";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 import ScrollContainer from "react-indiana-drag-scroll";
+import ContentDetail from "../components/MovieDetail";
+import Loader from "../components/Loader";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [favourites, setFavourites] = useState([]);
-  const [searchValue, setSearchValue] = useState("man");
+  const [searchValue, setSearchValue] = useState("war");
   const [total, setTotal] = useState();
   const [page, setPage] = useState();
+  const [detail, setShowDetail] = useState(false);
+  const [detailRequest, setDetailRequest] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handlePageClick = (e) => {
     console.log(e.selected + 1);
@@ -25,13 +31,17 @@ const App = () => {
 
   const getMovieRequest = async (searchValue, page) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
-
+    setLoading(true);
     const response = await fetch(url);
     const responseJson = await response.json();
     setTotal(Math.ceil(responseJson.totalResults / 10));
+
     if (responseJson.Search) {
       setMovies(responseJson.Search);
+    } else if (responseJson.Response == "False") {
+      setError(responseJson.Error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -77,21 +87,40 @@ const App = () => {
             setSearchValue={setSearchValue}
           />
         </div>
+        {loading && <Loader />}
+        {error !== null && (
+          <div style={{ margin: "20px 0", color: "white" }}>
+            <h1>{error}</h1>
+            {/* <Alert message={error} type="error" /> */}
+          </div>
+        )}
         <ScrollContainer className="row">
-          <MovieList
-            movies={movies}
-            handleFavouritesClick={addFavouriteMovie}
-            favouriteComponent={AddFavourites}
-          />
+          {movies.map((result, index) => (
+            <MovieList
+              ShowDetail={setShowDetail}
+              DetailRequest={setDetailRequest}
+              movies={movies}
+              handleFavouritesClick={addFavouriteMovie}
+              favouriteComponent={AddFavourites}
+              key={index}
+              {...result}
+            />
+          ))}
         </ScrollContainer>
-
-        <div className="row">
-          <MovieList
-            movies={favourites}
-            handleFavouritesClick={removeFavouriteMovie}
-            favouriteComponent={RemoveFavourites}
-          />
-        </div>
+        <ScrollContainer className="row">
+          {favourites.map((result, index) => (
+            <MovieList
+              ShowDetail={setShowDetail}
+              DetailRequest={setDetailRequest}
+              movies={favourites}
+              handleFavouritesClick={removeFavouriteMovie}
+              favouriteComponent={RemoveFavourites}
+              key={index}
+              {...result}
+            />
+          ))}
+          \
+        </ScrollContainer>
       </div>
       <div className="pagination">
         <ReactPaginate
@@ -108,6 +137,50 @@ const App = () => {
           activeClassName={"active"}
         />
       </div>
+      {/* <!-- Modal --> */}
+      <div
+        className="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog ">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1
+                className="modal-title fs-5 text-white"
+                id="exampleModalLabel"
+              >
+                {detail.Title}
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              {detailRequest === false ? (
+                <ContentDetail {...detail} />
+              ) : (
+                <Loader />
+              )}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <!-- End Of Modal --> */}
     </div>
   );
 };

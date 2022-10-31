@@ -35,6 +35,7 @@
 .image-container {
   position: relative;
   transition: transform 0.2s;
+  cursor: pointer;
 }
 
 .image-container:hover {

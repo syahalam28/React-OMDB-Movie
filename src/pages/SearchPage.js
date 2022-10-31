@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Alert } from "antd";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
+import ContentDetail from "../components/MovieDetail";
 
 // Global Key
 const APIKEY = "9aae4b93";
@@ -128,7 +129,7 @@ function SearchPage() {
                 </div>
                 <div className="modal-body">
                   {detailRequest === false ? (
-                    <ContenDetail {...detail} />
+                    <ContentDetail {...detail} />
                   ) : (
                     <Loader />
                   )}
