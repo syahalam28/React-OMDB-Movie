@@ -8,6 +8,7 @@ import SearchBox from "../components/SearchBox";
 import AddFavourites from "../components/AddFavourites";
 import RemoveFavourites from "../components/RemoveFavourites";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -76,13 +77,13 @@ const App = () => {
             setSearchValue={setSearchValue}
           />
         </div>
-        <div className="row">
+        <ScrollContainer className="row">
           <MovieList
             movies={movies}
             handleFavouritesClick={addFavouriteMovie}
             favouriteComponent={AddFavourites}
           />
-        </div>
+        </ScrollContainer>
 
         <div className="row">
           <MovieList
