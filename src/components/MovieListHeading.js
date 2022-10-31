@@ -6,7 +6,7 @@ const MovieListHeading = (props) => {
     <div className="col">
       <nav className="navbar ">
         <div className="container-fluid">
-          <a class="navbar-brand wow slideInLeft" href="/">
+          <a class="navbar-brand wow slideInLeft" href="/SearchMovie">
             <img
               style={{ width: "30px", height: "24" }}
               src="https://img.freepik.com/free-icon/3d-glasses_318-853705.jpg?size=338&ext=jpg"
@@ -20,6 +20,12 @@ const MovieListHeading = (props) => {
         <div className="container-fluid justify-content-start">
           {/* <input type="text" id="type" /> */}
           <Link to="/" className="btn btn-outline-light me-2 wow fadeInUp">
+            Home
+          </Link>
+          <Link
+            to="/SearchMovie"
+            className="btn btn-outline-light me-2 wow fadeInUp"
+          >
             Search Movie
           </Link>
           <Link

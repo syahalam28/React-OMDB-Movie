@@ -2,6 +2,7 @@ import "../App.css";
 import "../css/portofolio.css";
 import "../css/animate.css";
 import "../js/portofolio.js";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import WOW from "wowjs";
 import Navigation from "../components/Header";
 import Content from "../components/Movie";
@@ -16,6 +17,8 @@ import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 const APIKEY = "9aae4b93";
 
 function SearchPage() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [q, setQuery] = useState("war");
   const [type, setType] = useState("");
   const [page, setPage] = useState();
@@ -56,6 +59,10 @@ function SearchPage() {
         setError(message);
         setLoading(false);
       });
+    dispatch({
+      type: "SET_MOVIES",
+      payload: data,
+    });
   }, [q, type, page]);
 
   return (
@@ -84,7 +91,7 @@ function SearchPage() {
             data !== null &&
               data.length > 0 &&
               data.map((result, index) => (
-                <div className="col-sm-3">
+                <div className="col-sm-4 ">
                   <Content
                     key={index}
                     {...result}

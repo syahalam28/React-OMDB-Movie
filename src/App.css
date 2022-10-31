@@ -3,6 +3,35 @@
   flex-wrap: nowrap;
 }
 
+.intro {
+  height: 400px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.Judul {
+  /* Ukuran Font */
+  font-size: 3rem;
+  /* Ketebalan Font */
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 2px 2px black;
+  letter-spacing: 4px;
+}
+
+.myBg {
+  height: 100vh;
+  background: url("./asset/images/main.jpg");
+
+  background-size: cover;
+  color: aliceblue;
+}
+
+.movie-app > .row::-webkit-scrollbar {
+  display: none;
+}
+
 .image-container {
   position: relative;
   transition: transform 0.2s;

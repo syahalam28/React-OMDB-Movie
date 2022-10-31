@@ -7,7 +7,7 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark ">
         <div className="container-fluid">
-          <a class="navbar-brand wow slideInLeft" href="/">
+          <a class="navbar-brand wow slideInLeft" href="/SearchMovie">
             <img
               src="https://img.freepik.com/free-icon/3d-glasses_318-853705.jpg?size=338&ext=jpg"
               alt="Movie"
@@ -54,6 +54,12 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
         <div className="container-fluid justify-content-start">
           {/* <input type="text" id="type" /> */}
           <Link to="/" className="btn btn-outline-light me-2 wow fadeInUp">
+            Home
+          </Link>
+          <Link
+            to="/SearchMovie"
+            className="btn btn-outline-light me-2 wow fadeInUp"
+          >
             Search Movie
           </Link>
           <Link

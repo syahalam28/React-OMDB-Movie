@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import "../css/portofolio.css";
 import MovieList from "../components/MovieList";
 import MovieListHeading from "../components/MovieListHeading";
 import SearchBox from "../components/SearchBox";
 import AddFavourites from "../components/AddFavourites";
 import RemoveFavourites from "../components/RemoveFavourites";
+import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [searchValue, setSearchValue] = useState("man");
+  const [total, setTotal] = useState();
+  const [page, setPage] = useState();
 
-  const getMovieRequest = async (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
+  const handlePageClick = (e) => {
+    console.log(e.selected + 1);
+    const newOffset = e.selected + 1;
+    setPage(newOffset);
+  };
+
+  const getMovieRequest = async (searchValue, page) => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
-
+    setTotal(Math.ceil(responseJson.totalResults / 10));
     if (responseJson.Search) {
       setMovies(responseJson.Search);
     }
   };
 
   useEffect(() => {
-    getMovieRequest(searchValue);
-  }, [searchValue]);
+    getMovieRequest(searchValue, page);
+  }, [searchValue, page]);
 
   useEffect(() => {
     const movieFavourites = JSON.parse(
@@ -81,6 +91,21 @@ const App = () => {
             favouriteComponent={RemoveFavourites}
           />
         </div>
+      </div>
+      <div className="pagination">
+        <ReactPaginate
+          previousLabel={"Back"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={total}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={4}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
       </div>
     </div>
   );

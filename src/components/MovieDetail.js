@@ -16,9 +16,13 @@ const ContentDetail = ({
           <div className="col-md-4">
             <img
               style={{ height: "100%" }}
-              src={Poster}
+              src={
+                Poster === "N/A"
+                  ? "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.2.1833429700.1666169274&semt=sph"
+                  : Poster
+              }
               className="img-fluid rounded-start"
-              alt="..."
+              alt={Title}
             />
           </div>
           <div className="col-md-8">
