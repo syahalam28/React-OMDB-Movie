@@ -1,4 +1,5 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 const SearchBox = (props) => {
   return (
@@ -8,7 +9,7 @@ const SearchBox = (props) => {
         value={props.value}
         onChange={(event) => props.setSearchValue(event.target.value)}
         placeholder="Type to search..."
-      ></input>
+      />
     </div>
   );
 };

@@ -38,8 +38,6 @@ const App = () => {
 
     if (responseJson.Search) {
       setMovies(responseJson.Search);
-    } else if (responseJson.Response == "False") {
-      setError(responseJson.Error);
     }
     setLoading(false);
   };
