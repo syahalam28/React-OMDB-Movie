@@ -59,18 +59,17 @@ function LoginPage() {
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                       </div>
-                      {
-                        error.value &&
-                          MySwal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: `${error.value}`,
-                            footer: '<a href="/login">Try Again ?</a>',
-                            showConfirmButton: false,
-                          })
+                      {error.value && (
+                        // MySwal.fire({
+                        //   icon: "error",
+                        //   title: "Oops...",
+                        //   text: `${error.value}`,
+                        //   footer: '<Link to="/"></Link>',
+                        //   showConfirmButton: false,
+                        // })
                         // Swal.fire(`${error.value}`, "", "success")
-                        // <p className="text-danger"> {error.value} </p>
-                      }
+                        <p className="text-danger"> {error.value} </p>
+                      )}
                       <form action="" method="post">
                         <div className="mb-3">
                           <label
