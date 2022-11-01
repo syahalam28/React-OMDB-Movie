@@ -16,7 +16,7 @@ const MovieList = ({
     // Display Modal
     DetailRequest(true);
 
-    fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${APIKEY}`)
+    fetch(`https://www.omdbapi.com/?i=${imdbID}&apikey=${APIKEY}`)
       .then((resp) => resp)
       .then((resp) => resp.json())
       .then((response) => {

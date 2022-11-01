@@ -65,7 +65,7 @@ function LoginPage() {
                             icon: "error",
                             title: "Oops...",
                             text: `${error.value}`,
-                            footer: '<a href="">Try Again ?</a>',
+                            footer: '<a href="/login">Try Again ?</a>',
                             showConfirmButton: false,
                           })
                         // Swal.fire(`${error.value}`, "", "success")
