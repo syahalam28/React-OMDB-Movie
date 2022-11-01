@@ -1,7 +1,3 @@
-import "../App.css";
-import "../css/portofolio.css";
-import "../css/animate.css";
-import "../js/portofolio.js";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 

@@ -1,16 +1,10 @@
-import "../App.css";
-import "../css/portofolio.css";
-import "../css/animate.css";
-import "../js/portofolio.js";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import WOW from "wowjs";
 import Navigation from "../components/Header";
 import Content from "../components/Movie";
-import ContenDetail from "../components/MovieDetail";
 import Loader from "../components/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Alert } from "antd";
 import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 import ContentDetail from "../components/MovieDetail";
 import Footer from "../components/Footer";

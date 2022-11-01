@@ -1,5 +1,4 @@
 import Intro from "../components/Intro";
-import WOW from "wowjs";
 import "../css/portofolio.css";
 
 const IntroPage = () => {
