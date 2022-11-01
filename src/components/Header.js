@@ -1,8 +1,14 @@
 // import Search from "antd/lib/input/Search";
 import Search from "./Search";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 const Navigation = ({ searchHandler, filterType, pageType }) => {
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/SearchMovie");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark ">
@@ -98,6 +104,16 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
           >
             Episode
           </button>
+          {localStorage.getItem("token") && (
+            <button
+              data-wow-duration="2s"
+              className="btn btn-sm btn-outline-danger wow fadeInUp me-2"
+              type="button"
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </nav>
     </div>

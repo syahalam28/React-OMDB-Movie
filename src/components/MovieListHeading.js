@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MovieListHeading = (props) => {
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/SearchMovie");
+  };
   return (
     <div className="col">
       <nav className="navbar ">
@@ -34,6 +39,16 @@ const MovieListHeading = (props) => {
           >
             Favorite
           </Link>
+          {localStorage.getItem("token") && (
+            <button
+              data-wow-duration="2s"
+              className="btn btn-sm btn-outline-danger wow fadeInUp me-2"
+              type="button"
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </nav>
     </div>

@@ -11,6 +11,7 @@ import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
 import ScrollContainer from "react-indiana-drag-scroll";
 import ContentDetail from "../components/MovieDetail";
 import Loader from "../components/Loader";
+import Footer from "../components/Footer";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -179,6 +180,7 @@ const App = () => {
         </div>
       </div>
       {/* <!-- End Of Modal --> */}
+      <Footer />
     </div>
   );
 };
