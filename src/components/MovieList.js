@@ -32,7 +32,7 @@ const MovieList = ({
   return (
     <>
       <div
-        class="image-container d-flex justify-content-start m-3"
+        className="image-container d-flex justify-content-start m-3"
         onClick={() => clickHandler()}
         style={{ width: "20rem" }}
       >
@@ -48,10 +48,10 @@ const MovieList = ({
           alt={Title}
         ></img>
 
-        <div class="card-body">
+        <div className="card-body">
           <div
             href="#"
-            class="overlay"
+            className="overlay"
             onClick={() =>
               handleFavouritesClick({
                 imdbID,

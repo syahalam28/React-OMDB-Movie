@@ -8,8 +8,13 @@ import FavoritePage from "./pages/FavoritePage";
 import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/loginPage";
 import ProtectedRoute from "./components/ProtectedRoute ";
+import { useEffect } from "react";
+import WOW from "wowjs";
 
 function App() {
+  useEffect(() => {
+    new WOW.WOW().init();
+  }, []);
   return (
     <div>
       <Routes>

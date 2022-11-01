@@ -56,11 +56,11 @@ footer p {
 /* Pagination component CSS */
 
 .pagination {
-  color: aliceblue;
+  color: white;
   margin: 15px auto;
   padding: 0;
   display: flex;
-  align-items: center;
+  aligalicebluen-items: center;
   justify-content: center;
   list-style: none;
   outline: none;
@@ -88,7 +88,8 @@ footer p {
 }
 .pagination > li > a,
 .pagination > li > span {
-  color: black;
+  color: white;
+  text-decoration: none;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,

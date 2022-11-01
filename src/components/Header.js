@@ -13,7 +13,7 @@ const Navigation = ({ searchHandler, filterType, pageType }) => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark ">
         <div className="container-fluid">
-          <a class="navbar-brand wow slideInLeft" href="/SearchMovie">
+          <a className="navbar-brand wow slideInLeft" href="/SearchMovie">
             <img
               src="https://img.freepik.com/free-icon/3d-glasses_318-853705.jpg?size=338&ext=jpg"
               alt="Movie"

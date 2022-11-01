@@ -1,3 +1,5 @@
+import "../portofolio.css";
+import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import WOW from "wowjs";
 import Navigation from "../components/Header";
@@ -5,9 +7,10 @@ import Content from "../components/Movie";
 import Loader from "../components/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
-import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
+import ReactPaginate from "react-paginate";
 import ContentDetail from "../components/MovieDetail";
 import Footer from "../components/Footer";
+// import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.3";
 
 // Global Key
 const APIKEY = "9aae4b93";
@@ -15,9 +18,10 @@ const APIKEY = "9aae4b93";
 function SearchPage() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const [q, setQuery] = useState("war");
+  const [q, setQuery] = useState("");
   const [type, setType] = useState("");
-  const [page, setPage] = useState();
+  const [force, setForce] = useState("");
+  const [page, setPage] = useState("");
   const [total, setTotal] = useState();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
@@ -36,29 +40,90 @@ function SearchPage() {
     setError(null);
     setData(null);
 
-    fetch(
-      `http://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
-    )
-      .then((resp) => resp)
-      .then((resp) => resp.json())
-      .then((response) => {
-        if (response.Response == "False") {
-          setError(response.Error);
-        } else {
-          // setPage(page);
-          setTotal(Math.ceil(response.totalResults / 10));
-          setData(response.Search);
-        }
-        setLoading(false);
-      })
-      .catch(({ message }) => {
-        setError(message);
-        setLoading(false);
+    if (q !== "") {
+      fetch(
+        `http://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
+      )
+        .then((resp) => resp)
+        .then((resp) => resp.json())
+        .then((response) => {
+          if (response.Response == "False") {
+            setError(response.Error);
+            setTotal(0);
+            setForce(0);
+            setPage(1);
+          } else {
+            setTotal(Math.ceil(response.totalResults / 10));
+            setForce(0);
+            setData(response.Search);
+          }
+          setLoading(false);
+        })
+        .catch(({ message }) => {
+          setError(message);
+          setLoading(false);
+        });
+      dispatch({
+        type: "SET_MOVIES",
+        payload: data,
       });
-    dispatch({
-      type: "SET_MOVIES",
-      payload: data,
-    });
+    } else if (q === "") {
+      fetch(
+        `http://www.omdbapi.com/?s=war&apikey=${APIKEY}&type=${type}&page=${page}`
+      )
+        .then((resp) => resp)
+        .then((resp) => resp.json())
+        .then((response) => {
+          if (response.Response == "False") {
+            setError(response.Error);
+            setTotal(0);
+          } else {
+            // setPage(page);
+            setTotal(Math.ceil(response.totalResults / 10));
+            setData(response.Search);
+          }
+          setLoading(false);
+        })
+        .catch(({ message }) => {
+          setError(message);
+          setLoading(false);
+        });
+      dispatch({
+        type: "SET_MOVIES",
+        payload: data,
+      });
+    }
+
+    // fetch(
+    //   `http://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
+    // )
+    //   .then((resp) => resp)
+    //   .then((resp) => resp.json())
+    //   .then((response) => {
+    //     if (q) {
+    //       setForce(0);
+    //     }
+    //     if (q === "") {
+    //       setQuery("war");
+    //     }
+    //     if (response.Response == "False") {
+    //       setError(response.Error);
+    //       setTotal(0);
+    //     } else {
+    //       // setPage(page);
+    //       setTotal(Math.ceil(response.totalResults / 10));
+    //       setData(response.Search);
+    //     }
+    //     setLoading(false);
+    //   })
+    //   .catch(({ message }) => {
+    //     setError(message);
+    //     setLoading(false);
+    //   });
+    // dispatch({
+    //   type: "SET_MOVIES",
+    //   payload: data,
+    // });
   }, [q, type, page]);
 
   return (
@@ -87,7 +152,7 @@ function SearchPage() {
             data !== null &&
               data.length > 0 &&
               data.map((result, index) => (
-                <div className="col-sm-4 ">
+                <div key={index} className="col-sm-4 ">
                   <Content
                     key={index}
                     {...result}
@@ -102,7 +167,7 @@ function SearchPage() {
           <div
             className="modal fade"
             id="exampleModal"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
@@ -156,6 +221,7 @@ function SearchPage() {
             containerClassName={"pagination"}
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
+            forcePage={force}
           />
         </div>
       </div>

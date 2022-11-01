@@ -4,11 +4,13 @@ import MovieListHeading from "../components/MovieListHeading";
 import SearchBox from "../components/SearchBox";
 import AddFavourites from "../components/AddFavourites";
 import RemoveFavourites from "../components/RemoveFavourites";
-import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.0";
+import ReactPaginate from "react-paginate";
 import ScrollContainer from "react-indiana-drag-scroll";
 import ContentDetail from "../components/MovieDetail";
 import Loader from "../components/Loader";
 import Footer from "../components/Footer";
+import "../portofolio.css";
+import "../App.css";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -20,6 +22,7 @@ const App = () => {
   const [detailRequest, setDetailRequest] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [force, setForce] = useState("");
 
   const handlePageClick = (e) => {
     console.log(e.selected + 1);
@@ -28,14 +31,29 @@ const App = () => {
   };
 
   const getMovieRequest = async (searchValue, page) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
+    let url = "";
+
+    if (searchValue === "") {
+      url = `http://www.omdbapi.com/?s=war&apikey=9aae4b93&page=${page}`;
+    } else {
+      url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
+    }
+
+    // const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
     setLoading(true);
     const response = await fetch(url);
     const responseJson = await response.json();
     setTotal(Math.ceil(responseJson.totalResults / 10));
 
+    if (responseJson.Response == "False") {
+      setTotal(0);
+      setForce(0);
+      setPage(1);
+    }
+
     if (responseJson.Search) {
       setMovies(responseJson.Search);
+      setForce(0);
     }
     setLoading(false);
   };
@@ -72,6 +90,12 @@ const App = () => {
     setFavourites(newFavouriteList);
     saveToLocalStorage(newFavouriteList);
   };
+  // const popoverTriggerList = document.querySelectorAll(
+  //   '[data-bs-toggle="popover"]'
+  // );
+  // const popoverList = [...popoverTriggerList].map(
+  //   (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+  // );
 
   return (
     <div>
@@ -87,9 +111,17 @@ const App = () => {
         {error !== null && (
           <div style={{ margin: "20px 0", color: "white" }}>
             <h1>{error}</h1>
-            {/* <Alert message={error} type="error" /> */}
           </div>
         )}
+        <button
+          type="button"
+          className="btn btn-lg btn-danger"
+          data-bs-toggle="popover"
+          data-bs-title="Popover title"
+          data-bs-content="And here's some amazing content. It's very engaging. Right?"
+        >
+          Movies
+        </button>
         <ScrollContainer className="row">
           {movies.map((result, index) => (
             <MovieList
@@ -131,13 +163,14 @@ const App = () => {
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
+          forcePage={force}
         />
       </div>
       {/* <!-- Modal --> */}
       <div
         className="modal fade"
         id="exampleModal1"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
