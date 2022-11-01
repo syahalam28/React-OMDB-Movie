@@ -93,37 +93,6 @@ function SearchPage() {
         payload: data,
       });
     }
-
-    // fetch(
-    //   `http://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
-    // )
-    //   .then((resp) => resp)
-    //   .then((resp) => resp.json())
-    //   .then((response) => {
-    //     if (q) {
-    //       setForce(0);
-    //     }
-    //     if (q === "") {
-    //       setQuery("war");
-    //     }
-    //     if (response.Response == "False") {
-    //       setError(response.Error);
-    //       setTotal(0);
-    //     } else {
-    //       // setPage(page);
-    //       setTotal(Math.ceil(response.totalResults / 10));
-    //       setData(response.Search);
-    //     }
-    //     setLoading(false);
-    //   })
-    //   .catch(({ message }) => {
-    //     setError(message);
-    //     setLoading(false);
-    //   });
-    // dispatch({
-    //   type: "SET_MOVIES",
-    //   payload: data,
-    // });
   }, [q, type, page]);
 
   return (

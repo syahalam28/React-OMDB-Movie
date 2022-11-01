@@ -43,17 +43,15 @@ const App = () => {
     setLoading(true);
     const response = await fetch(url);
     const responseJson = await response.json();
-    setTotal(Math.ceil(responseJson.totalResults / 10));
 
     if (responseJson.Response == "False") {
       setTotal(0);
       setForce(0);
       setPage(1);
-    }
-
-    if (responseJson.Search) {
+    } else {
       setMovies(responseJson.Search);
       setForce(0);
+      setTotal(Math.ceil(responseJson.totalResults / 10));
     }
     setLoading(false);
   };
@@ -113,13 +111,7 @@ const App = () => {
             <h1>{error}</h1>
           </div>
         )}
-        <button
-          type="button"
-          className="btn btn-lg btn-danger"
-          data-bs-toggle="popover"
-          data-bs-title="Popover title"
-          data-bs-content="And here's some amazing content. It's very engaging. Right?"
-        >
+        <button type="button" className="btn btn-lg btn-outline-light">
           Movies
         </button>
         <ScrollContainer className="row">
@@ -135,6 +127,9 @@ const App = () => {
             />
           ))}
         </ScrollContainer>
+        <button type="button" className="btn btn-lg btn-outline-light">
+          Favourites
+        </button>
         <ScrollContainer className="row">
           {favourites.map((result, index) => (
             <MovieList
