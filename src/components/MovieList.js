@@ -9,7 +9,7 @@ const MovieList = ({
   favouriteComponent,
   handleFavouritesClick,
 }) => {
-  const APIKEY = "9aae4b93";
+  const APIKEY = "ad645020";
   const FavouriteComponent = favouriteComponent;
   // Function Click
   const clickHandler = () => {

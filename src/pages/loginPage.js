@@ -12,7 +12,7 @@ function LoginPage() {
   const [error, setErrorMessage] = useState({ value: "" });
   const [data, setData] = useState({ username: "", password: "" });
 
-  console.log("auth", localStorage.getItem("isAuthenticated"));
+  // console.log("auth", localStorage.getItem("isAuthenticated"));
 
   const handleInputChange = (e) => {
     setData((prevState) => {

@@ -13,7 +13,7 @@ import Footer from "../components/Footer";
 // import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.3";
 
 // Global Key
-const APIKEY = "9aae4b93";
+const APIKEY = "ad645020";
 
 function SearchPage() {
   const state = useSelector((state) => state);
@@ -42,7 +42,7 @@ function SearchPage() {
 
     if (q !== "") {
       fetch(
-        `https://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
+        `https://www.omdbapi.com/?s=${q}&apikey=ad645020&type=${type}&page=${page}`
       )
         .then((resp) => resp)
         .then((resp) => resp.json())
@@ -69,7 +69,7 @@ function SearchPage() {
       });
     } else if (q === "") {
       fetch(
-        `https://www.omdbapi.com/?s=war&apikey=${APIKEY}&type=${type}&page=${page}`
+        `https://www.omdbapi.com/?s=war&apikey=ad645020&type=${type}&page=${page}`
       )
         .then((resp) => resp)
         .then((resp) => resp.json())

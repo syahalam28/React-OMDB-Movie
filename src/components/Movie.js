@@ -1,4 +1,4 @@
-const APIKEY = "9aae4b93";
+const APIKEY = "ad645020";
 const Content = ({
   Title,
   imdbID,

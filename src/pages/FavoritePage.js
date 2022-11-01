@@ -34,9 +34,9 @@ const App = () => {
     let url = "";
 
     if (searchValue === "") {
-      url = `https://www.omdbapi.com/?s=war&apikey=9aae4b93&page=${page}`;
+      url = `https://www.omdbapi.com/?s=war&apikey=ad645020&page=${page}`;
     } else {
-      url = `https://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
+      url = `https://www.omdbapi.com/?s=${searchValue}&apikey=ad645020&page=${page}`;
     }
 
     // const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
@@ -45,8 +45,8 @@ const App = () => {
     const responseJson = await response.json();
 
     if (responseJson.Response == "False") {
-      setTotal(0);
-      setForce(0);
+      // setTotal(0);
+      setTotal(Math.ceil(responseJson.totalResults / 10));
       setPage(1);
     } else {
       setMovies(responseJson.Search);
