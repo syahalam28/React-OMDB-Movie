@@ -34,9 +34,9 @@ const App = () => {
     let url = "";
 
     if (searchValue === "") {
-      url = `http://www.omdbapi.com/?s=war&apikey=9aae4b93&page=${page}`;
+      url = `https://www.omdbapi.com/?s=war&apikey=9aae4b93&page=${page}`;
     } else {
-      url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
+      url = `https://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;
     }
 
     // const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9aae4b93&page=${page}`;

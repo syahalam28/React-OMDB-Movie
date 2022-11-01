@@ -42,7 +42,7 @@ function SearchPage() {
 
     if (q !== "") {
       fetch(
-        `http://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
+        `https://www.omdbapi.com/?s=${q}&apikey=${APIKEY}&type=${type}&page=${page}`
       )
         .then((resp) => resp)
         .then((resp) => resp.json())
@@ -69,7 +69,7 @@ function SearchPage() {
       });
     } else if (q === "") {
       fetch(
-        `http://www.omdbapi.com/?s=war&apikey=${APIKEY}&type=${type}&page=${page}`
+        `https://www.omdbapi.com/?s=war&apikey=${APIKEY}&type=${type}&page=${page}`
       )
         .then((resp) => resp)
         .then((resp) => resp.json())
