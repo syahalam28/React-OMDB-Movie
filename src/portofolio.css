@@ -1,12 +1,12 @@
 /* Menghilangkan Terlebih Dahulu Image Portofolio Lalu Memunculkannya Lagi */
 body {
-  background-image: url("../Fade-In-Background.svg");
+  background-image: url("./Fade-In-Background.svg");
 
   background-attachment: fixed;
   background-size: cover;
 }
 .modal-content {
-  background-image: url("../Live-Motion-Background.svg");
+  background-image: url("./Live-Motion-Background.svg");
 
   background-attachment: fixed;
   background-size: cover;

@@ -1,5 +1,5 @@
 import Intro from "../components/Intro";
-import "../css/portofolio.css";
+import "../portofolio.css";
 
 const IntroPage = () => {
   return (

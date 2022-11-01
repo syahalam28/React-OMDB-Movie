@@ -1,7 +1,7 @@
 import "./App.css";
-import "./css/portofolio.css";
-import "./css/animate.css";
-import "./js/portofolio.js";
+import "./portofolio.css";
+import "./animate.css";
+import "./portofolio.js";
 import { Routes, Route } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
 import FavoritePage from "./pages/FavoritePage";
