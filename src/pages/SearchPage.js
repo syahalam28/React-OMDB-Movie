@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import ContentDetail from "../components/MovieDetail";
 import Footer from "../components/Footer";
+
 // import ReactPaginate from "https://cdn.skypack.dev/react-paginate@7.1.3";
 
 // Global Key
@@ -27,6 +28,7 @@ function SearchPage() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [detail, setShowDetail] = useState(false);
+  const [trailer, setShowTrailer] = useState(false);
   const [detailRequest, setDetailRequest] = useState(false);
   const handlePageClick = (e) => {
     console.log(e.selected + 1);
@@ -127,10 +129,12 @@ function SearchPage() {
                     {...result}
                     ShowDetail={setShowDetail}
                     DetailRequest={setDetailRequest}
+                    showTrailer={setShowTrailer}
                   />
                 </div>
               ))
           }
+
           {/* End Of Content */}
           {/* <!-- Modal --> */}
           <div
@@ -159,6 +163,60 @@ function SearchPage() {
                 <div className="modal-body">
                   {detailRequest === false ? (
                     <ContentDetail {...detail} />
+                  ) : (
+                    <Loader />
+                  )}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <!-- End Of Modal --> */}
+          {/* <!-- Modal --> */}
+          <div
+            className="modal fade"
+            id="exampleModal1"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-xl">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1
+                    className="modal-title fs-5 text-white"
+                    id="exampleModalLabel"
+                  >
+                    {trailer.title}
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  {detailRequest === false ? (
+                    <iframe
+                      style={{ marginLeft: "8rem" }}
+                      src={trailer.linkEmbed}
+                      allowfullscreen="true"
+                      mozallowfullscreen="true"
+                      webkitallowfullscreen="true"
+                      scrolling="no"
+                      width="200%"
+                      height="500"
+                      frameborder="no"
+                    ></iframe>
                   ) : (
                     <Loader />
                   )}

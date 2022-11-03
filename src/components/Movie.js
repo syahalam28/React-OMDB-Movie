@@ -1,4 +1,6 @@
+import ProtectedElement from "./ProtectedElement";
 const APIKEY = "ad645020";
+const APIKEY_TRAILER = "k_tynf52n6";
 const Content = ({
   Title,
   imdbID,
@@ -7,6 +9,7 @@ const Content = ({
   ShowDetail,
   DetailRequest,
   Year,
+  showTrailer,
 }) => {
   // Function Click
   const clickHandler = () => {
@@ -24,17 +27,31 @@ const Content = ({
         DetailRequest(false);
       });
   };
+
+  const clickTrailer = () => {
+    DetailRequest(true);
+    fetch(`https://imdb-api.com/API/Trailer/${APIKEY_TRAILER}/${imdbID}`)
+      .then((resp) => resp)
+      .then((resp) => resp.json())
+      .then((response) => {
+        DetailRequest(false);
+        showTrailer(response);
+      })
+      .catch(({ message }) => {
+        DetailRequest(false);
+      });
+  };
   // document.getElementById("cari").value("");
   return (
     <div className="portofolio">
       <div
         className="card mt-4 image-container "
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        style={{ width: "18rem", height: "550px", cursor: "pointer" }}
-        onClick={() => clickHandler()}
+        style={{ width: "18rem", height: "600px", cursor: "pointer" }}
       >
         <img
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onClick={() => clickHandler()}
           style={{ width: "100%" }}
           src={
             Poster === "N/A"
@@ -49,6 +66,7 @@ const Content = ({
 
           <h5 className="card-title">{Title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{Year}</h6>
+          <ProtectedElement clickme={clickTrailer} />
         </div>
       </div>
     </div>

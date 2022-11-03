@@ -157,7 +157,6 @@ const App = () => {
           onPageChange={handlePageClick}
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
           forcePage={force}
         />
       </div>

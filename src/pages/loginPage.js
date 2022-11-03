@@ -31,8 +31,8 @@ function LoginPage() {
         value: "Empty username or password field",
       }));
     } else if (
-      data.username == "izaazsyahalam@gmail.com" &&
-      data.password == "syahalam28"
+      data.username == "izaazsyahalam@admin.com" &&
+      data.password == "admin"
     ) {
       //Signin Success
       localStorage.setItem("token", "login");
@@ -80,6 +80,7 @@ function LoginPage() {
                             Email address
                           </label>
                           <input
+                            placeholder="izaazsyahalam@admin.com"
                             type="email"
                             className="form-control input"
                             id="exampleInputEmail1"
@@ -101,6 +102,7 @@ function LoginPage() {
                             Password
                           </label>
                           <input
+                            placeholder="admin"
                             type="password"
                             id="inputPassword5"
                             className="form-control"
