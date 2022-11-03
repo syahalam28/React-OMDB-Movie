@@ -30,6 +30,9 @@ function SearchPage() {
   const [detail, setShowDetail] = useState(false);
   const [trailer, setShowTrailer] = useState(false);
   const [detailRequest, setDetailRequest] = useState(false);
+  const stop = () => {
+    document.getElementById("frame").src = stop;
+  };
   const handlePageClick = (e) => {
     console.log(e.selected + 1);
     const newOffset = e.selected + 1;
@@ -207,6 +210,7 @@ function SearchPage() {
                 <div className="modal-body">
                   {detailRequest === false ? (
                     <iframe
+                      id="frame"
                       style={{ marginLeft: "8rem" }}
                       src={trailer.linkEmbed}
                       allowfullscreen="true"
@@ -223,6 +227,7 @@ function SearchPage() {
                 </div>
                 <div className="modal-footer">
                   <button
+                    onClick={() => stop()}
                     type="button"
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
